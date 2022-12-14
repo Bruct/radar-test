@@ -214,7 +214,7 @@ if selected == "Audit":
     placeholder = st.empty()
     with placeholder.form("formulaire"):
         st.header("Fiche d'identité de l'entreprise")
-        st.header("IMPORTANT : Veillez à ne pas indiquer le nom du client dans le cadre d'une mission confidentielle ou du secteur financier; indiquez uniquement son secteur d'activité")
+        st.subheader("IMPORTANT : Veillez à ne pas indiquer le nom du client dans le cadre d'une mission confidentielle ou du secteur financier; indiquez uniquement son secteur d'activité")
         st.text_area("", placeholder="Nom du client", key="nom")
         st.selectbox("Secteur d'activité", practice_sectorielle, key="secteur")
         st.selectbox("Taille de l'entreprise", ["0-50 employés", "51-500 employés", "501-1000 employés", "1001 à 2000 employés", "+2000 employés"], key="taille")
@@ -340,7 +340,7 @@ if selected == "Comparaison":
     if axe_leaderboard != "Tout":
         df_work = df_work.sort_values(by=axe_leaderboard, ascending=False).iloc[:5,:]
     else:
-        df_work = df_work.sort_values(by='score moyen   ', ascending=False).iloc[:5,:]
+        df_work = df_work.sort_values(by='score moyen', ascending=False).iloc[:5,:]
     st.dataframe(df_work.head()) 
     
     
