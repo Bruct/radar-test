@@ -205,6 +205,7 @@ if selected=="Méthodologie":
                 * Socle technique
                 * Réglementaire/Sécuritaire
                 """)
+    st.subheader("3. Grille de lecture des différents niveaux de maturité")
     image = Image.open('grille.png')
     st.image(image, caption='Grille de lecture du radar')
     
@@ -214,7 +215,7 @@ if selected == "Audit":
     placeholder = st.empty()
     with placeholder.form("formulaire"):
         st.header("Fiche d'identité de l'entreprise")
-        st.subheader("IMPORTANT : Veillez à ne pas indiquer le nom du client dans le cadre d'une mission confidentielle ou du secteur financier; indiquez uniquement son secteur d'activité")
+        st.markdown("###### IMPORTANT : Veillez à ne pas indiquer le nom du client dans le cadre d'une mission confidentielle ou du secteur financier; indiquez uniquement son secteur d'activité")
         st.text_area("", placeholder="Nom du client", key="nom")
         st.selectbox("Secteur d'activité", practice_sectorielle, key="secteur")
         st.selectbox("Taille de l'entreprise", ["0-50 employés", "51-500 employés", "501-1000 employés", "1001 à 2000 employés", "+2000 employés"], key="taille")
