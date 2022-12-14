@@ -282,7 +282,7 @@
         "reponses": {
             "Non": 0,
             "En cours de définition": 1,
-            "Oui, mais utilisée": 2,
+            "Oui, mais mal/peu utilisée": 2,
             "Oui et utilisé": 3
         },
         "thème": "Cas d'usage data",
@@ -382,7 +382,7 @@
         "sous-thème": "Architecture data"
     },
     "39": {
-        "question": "Avez-vous déployé des solutions data dans le Cloud (Mature : Oui - si non comprendre pourquoi ils n'y vont pas)",
+        "question": "Avez-vous déployé des solutions data dans le Cloud (Si non, répondre en commentaire pourquoi)",
         "reponses": {
             "Non": 0,
             "Oui": 1
@@ -447,9 +447,9 @@
     "46": {
         "question": "Comment qualifieriez-vous la maîtrise règlementaire data par l’ensemble des acteurs impliqués ?",
         "reponses": {
-            "Des juriestes savent réellement se positionner sur la légalité d’un traitement ? ": 1,
-            "Les acteurs Data-science, DSI et CDO maitrisent parfaitement la chose ? ": 2,
-            "Les métiers sont les premiers concernés et maitrisent totalement l'aspect réglementaire ?": 3
+            "Seuls les juristes savent se positionner sur la maitrise règlementaire data": 1,
+            "Les acteurs Data-science, DSI et CDO maitrisent parfaitement la chose": 2,
+            "Les métiers sont les premiers concernés et maitrisent totalement l'aspect réglementaire": 3
         },
         "thème": "Réglementaire/Sécuritaire",
         "sous-thème": "Maîtrise réglementaire"
@@ -467,8 +467,8 @@
     "48": {
         "question": "Jugez-vous que la règlementation des données dans votre secteur industriel / zone géographique est :",
         "reponses": {
-            "Défavorable à la création de valeur par votre organisation ?": 1,
-            "Une opportunité pour mettre le sujet data au cœur de l’entreprise et en profiter pour accélérer sur la transformation Data-driven ? ": 2
+            "Défavorable à la création de valeur par votre organisation": 1,
+            "Une opportunité pour mettre le sujet data au cœur de l’entreprise et en profiter pour accélérer sur la transformation Data-driven": 2
         },
         "thème": "Réglementaire/Sécuritaire",
         "sous-thème": "Maîtrise réglementaire"
@@ -510,7 +510,16 @@
         "sous-thème": "Sécuritaire"
     },
     "53": {
-        "question": "Avez-vous eu connaissance d'une fuite de données récemment au sein de votre organisation ?",
+        "question": "Avez-vous un processus permettant de détecter une fuite de données ?",
+        "reponses": {
+            "Non": 0,
+            "Oui": 1
+        },
+        "thème": "Réglementaire/Sécuritaire",
+        "sous-thème": "Sécuritaire"
+    },
+    "54": {
+        "question": "Avez-vous un processus défini lorsqu'une fuite de données est constatée ?",
         "reponses": {
             "Non": 0,
             "Oui": 1
