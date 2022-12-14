@@ -1,0 +1,521 @@
+{
+    "0": {
+        "question": "Existe-t-il une gouvernance de la donnée au sein de votre organisation ?",
+        "reponses": {
+            "Non": 0,
+            "En cours de définition": 1,
+            "Oui": 2
+        },
+        "thème": "Gouvernance data",
+        "sous-thème": "Gouvernance data"
+    },
+    "1": {
+        "question": "Si oui, quelle est sa récurrence ?",
+        "reponses": {
+            "Suivi annuel": 1,
+            "Suivi semestriel": 2,
+            "Suivi trimestriel ": 3,
+            "Suivi mensuel ": 4
+        },
+        "thème": "Gouvernance data",
+        "sous-thème": "Gouvernance data"
+    },
+    "2": {
+        "question": "Si oui, qui implique t-elle ?",
+        "reponses": {
+            "Uniquement les métiers": 1,
+            "Uniquement la direction": 2,
+            "Tous les acteurs sont impliqués, côté métiers et côté direction": 3
+        },
+        "thème": "Gouvernance data",
+        "sous-thème": "Gouvernance data"
+    },
+    "3": {
+        "question": "Comment qualifieriez-vous la gouvernance en place ? ",
+        "reponses": {
+            "Non adaptée, la gouvernance en place ne permet pas un pilotage optimale de la donnée": 1,
+            "Adaptée, mais insuffisante. La gouvernance en place ne permet de piloter globalement la donnée de l'entreprise": 2,
+            "Adaptée et suffisante. Un pilotage de la donnée est opéré à travers la gouvernance en place et permet de piloter les bons indicateurs ": 3
+        },
+        "thème": "Gouvernance data",
+        "sous-thème": "Gouvernance data"
+    },
+    "4": {
+        "question": "Avez-vous un Chief Data Officer ?",
+        "reponses": {
+            "Non": 0,
+            "Oui": 1
+        },
+        "thème": "Gouvernance data",
+        "sous-thème": "Rôle data"
+    },
+    "5": {
+        "question": "Existe t-il des rôles définis au sein de votre organisation autour de la donnée (Data Owner, Data Steward, Data Custodian, Data Analyst, Data Architect, Data Viz, Data Champion, Data Quality Manager) ?",
+        "reponses": {
+            "Absence de rôles ": 1,
+            "Quelques rôles sont en place": 2,
+            "Une majeure partie des rôles sont définis et en place": 3,
+            "L'ensemble des rôles autour de la donnée sont définis et en place": 4
+        },
+        "thème": "Gouvernance data",
+        "sous-thème": "Rôle data"
+    },
+    "6": {
+        "question": "Les rôles en place sont-ils suffisants pour le pilotage de la donnée ?",
+        "reponses": {
+            "Non, il faut identifier davantage de personnes": 1,
+            "Oui, des rôles sont clairements identfiés et leur périmètre d'intervention aussi ": 2
+        },
+        "thème": "Gouvernance data",
+        "sous-thème": "Rôle data"
+    },
+    "7": {
+        "question": "Avez-vous une matrice de rôles définie et validée \n (i.e. validée par les ressources humaines) ?",
+        "reponses": {
+            "Non": 0,
+            "La matrice de rôle est définie mais pas validée par les ressources humaines": 1,
+            "La matrice de rôle est définie et validée par les ressources humaines": 2
+        },
+        "thème": "Gouvernance data",
+        "sous-thème": "Rôle data"
+    },
+    "8": {
+        "question": "Les rôles définis sont-ils des postes à part entière ?",
+        "reponses": {
+            "Non": 0,
+            "Oui": 1
+        },
+        "thème": "Gouvernance data",
+        "sous-thème": "Rôle data"
+    },
+    "9": {
+        "question": "Avez-vous identifié ou cartographié les golden sources (i.e. données les plus utilisées) de votre organisation ?",
+        "reponses": {
+            "Non": 0,
+            "Oui": 1
+        },
+        "thème": "Culture data",
+        "sous-thème": "Sensibilisation/Acculturation data"
+    },
+    "10": {
+        "question": "Est-ce qu'une matrice d'éligibilité data est utilisée lorsqu'un projet est soumis en comité d'engagement ?",
+        "reponses": {
+            "Non": 0,
+            "Oui": 1
+        },
+        "thème": "Culture data",
+        "sous-thème": "Sensibilisation/Acculturation data"
+    },
+    "11": {
+        "question": "Les collaborateurs sont-ils sensibilisés sur l'importance d'avoir des données fiables ?",
+        "reponses": {
+            "Non, pas du tout": 0,
+            "Oui, mais aucune règle n'est établie": 1,
+            "Oui, des règles sont établies": 2,
+            "Oui, des règles sont établies et des contrôles sont opérés ": 3
+        },
+        "thème": "Culture data",
+        "sous-thème": "Sensibilisation/Acculturation data"
+    },
+    "12": {
+        "question": "Avez-vous des formations d'acculturation / montée en compétences data ?",
+        "reponses": {
+            "Non": 0,
+            "Oui": 1,
+            "Oui, et les collaborateurs sont vivement encouragés à les réaliser": 2
+        },
+        "thème": "Culture data",
+        "sous-thème": "Sensibilisation/Acculturation data"
+    },
+    "13": {
+        "question": "Avez-vous une vision claire de votre patrimoine de données ?",
+        "reponses": {
+            "Faible connaissance de la localisation des données dans le SI": 1,
+            "Catalogue de données existant": 2,
+            "Gestion avancée du patrimoine des données (recherche, catalogue, dictionnaire)": 3,
+            "Vision dynamique du patrimoine des données (analyse d'impacts, lineage)": 4
+        },
+        "thème": "Culture data",
+        "sous-thème": "Sensibilisation/Acculturation data"
+    },
+    "14": {
+        "question": "Comment qualifieriez-vous la relation entre les métiers et les équipes data-science/SI ?",
+        "reponses": {
+            "Pas de relation": 1,
+            "Peu de relation / communication entre les équipes": 2,
+            "Client / Fournisseur": 3,
+            "Relation de partenaires": 4
+        },
+        "thème": "Culture data",
+        "sous-thème": "Relations métiers/équipes Data Science"
+    },
+    "15": {
+        "question": "Existe-t-il une roadmap partagée entre équipes Data-science/SI et métiers listant l’ensemble des cas d’usage data à délivrer ?",
+        "reponses": {
+            "Non": 0,
+            "Oui": 1
+        },
+        "thème": "Culture data",
+        "sous-thème": "Relations métiers/équipes Data Science"
+    },
+    "16": {
+        "question": "Lors d'un PoC, à quel moment les équipes métiers s'engagent-elles sur le projet auprès des data scientists ?",
+        "reponses": {
+            "A aucun moment": 0,
+            "Au début ou à la fin": 1,
+            "Au début et à la fin": 2,
+            "Tout au long du PoC": 3
+        },
+        "thème": "Culture data",
+        "sous-thème": "Relations métiers/équipes Data Science"
+    },
+    "17": {
+        "question": "Est-ce que le Chief Data Officer est autonome dans sa prise de décision ? (pas de dépendance vis-à-vis du DSI ou du CFO)",
+        "reponses": {
+            "Non": 0,
+            "Oui": 1
+        },
+        "thème": "Culture data",
+        "sous-thème": "Engagement"
+    },
+    "18": {
+        "question": "Y a-t-il des représentants des équipes métiers et SI engagées dans une démarche de gouvernance globale (incluant la direction) ?",
+        "reponses": {
+            "Non": 0,
+            "Oui": 1
+        },
+        "thème": "Culture data",
+        "sous-thème": "Engagement"
+    },
+    "19": {
+        "question": "La direction prend-elle part aux orientations stratégiques autour de la donnée ?",
+        "reponses": {
+            "Non": 0,
+            "Oui": 1
+        },
+        "thème": "Culture data",
+        "sous-thème": "Engagement"
+    },
+    "20": {
+        "question": "Existe-t-il une démarche établie concernant les cas d'usage identifiés autour de la donnée au sein de l'entreprise ?",
+        "reponses": {
+            "Pas de démarche": 0,
+            "Démarche formalisée mais non priorisée": 1,
+            "Démarche formalisée et priorisée": 2,
+            "Démarche industrialisée": 3
+        },
+        "thème": "Cas d'usage data",
+        "sous-thème": "Définition et priorisation des cas d'usage"
+    },
+    "21": {
+        "question": "Le dimensionnement des équipes data est-il corrélé au nombre de PoCs / cas d'usage ? \n (limitation du nombre de PoC par rapport aux équipes disponibles)",
+        "reponses": {
+            "Non": 0,
+            "Oui": 1
+        },
+        "thème": "Cas d'usage data",
+        "sous-thème": "Définition et priorisation des cas d'usage"
+    },
+    "22": {
+        "question": "Selon vous, est-ce que les cas d'usage identifiés par les métiers répondent pleinement aux orientations stratégiques de votre organisation ?",
+        "reponses": {
+            "Non, pas du tout": 0,
+            "Partiellement": 1,
+            "Pleinement": 2
+        },
+        "thème": "Cas d'usage data",
+        "sous-thème": "Définition et priorisation des cas d'usage"
+    },
+    "23": {
+        "question": "Selon vous, est-ce que les cas d'usage identifiés par la direction de votre organisation répondent aux besoins métiers?",
+        "reponses": {
+            "Non, pas du tout": 0,
+            "Partiellement": 1,
+            "Pleinement": 2
+        },
+        "thème": "Cas d'usage data",
+        "sous-thème": "Définition et priorisation des cas d'usage"
+    },
+    "24": {
+        "question": "J’ai un cas d’usage complexe potentiellement très innovant pour mon cœur de métier :",
+        "reponses": {
+            "Je choisis la meilleure startup pour m’aider à le réaliser ": 1,
+            "Je fais un partenariat avec un géant du digital/data  ": 2,
+            "Je choisis un très bon data-scientist externe indépendant et garde la P.I. ": 3,
+            "Je mobilise mes meilleurs équipes internes pour le délivrer ": 4
+        },
+        "thème": "Cas d'usage data",
+        "sous-thème": "Définition et priorisation des cas d'usage"
+    },
+    "25": {
+        "question": "Avez-vous un outil de visualisation des cas d'usage ?  \n (ne concerne pas tous les cas d'usage)",
+        "reponses": {
+            "Non": 0,
+            "Oui": 1
+        },
+        "thème": "Cas d'usage data",
+        "sous-thème": "Définition et priorisation des cas d'usage"
+    },
+    "26": {
+        "question": "Existe t-il des cas d’usage de valorisation de la donnée innovants industrialisés dans votre organisation et vos SI ?",
+        "reponses": {
+            "Aucun": 0,
+            "Quelques-uns ": 1,
+            "Tous": 2
+        },
+        "thème": "Cas d'usage data",
+        "sous-thème": "Industrialisation des cas d'usage"
+    },
+    "27": {
+        "question": "A quel moment la DSI est-elle impliquée dans la chaine de valeur d’un PoC autour de la data ?",
+        "reponses": {
+            "Jamais": 0,
+            "Au moment de la validation du lancement du PoC ": 1,
+            "Lors du delivery du PoC ": 2,
+            "Une fois le PoC finalisé et la décision d’industrialisée prise ": 3
+        },
+        "thème": "Cas d'usage data",
+        "sous-thème": "Industrialisation des cas d'usage"
+    },
+    "28": {
+        "question": "Existe-t-il un Schéma Directeur SI Data-Ready pour préparer le SI à accueillir un nouvel algorithme / solution autour de la donnée ?",
+        "reponses": {
+            "Non": 0,
+            "En cours de définition": 1,
+            "Oui, mais utilisée": 2,
+            "Oui et utilisé": 3
+        },
+        "thème": "Cas d'usage data",
+        "sous-thème": "Industrialisation des cas d'usage"
+    },
+    "29": {
+        "question": "Comment gérez-vous le cycle de vie des données ?",
+        "reponses": {
+            "Pas de politique définie": 0,
+            "Une politique de gestion des données est définie et mise en œuvre": 1,
+            "Maintien et évolution de la politique de gestion du cycle de vie des données": 2
+        },
+        "thème": "Qualité de la donnée",
+        "sous-thème": "Processus"
+    },
+    "30": {
+        "question": "On vous confie une mission sur la Data-Quality, par quoi commencez-vous ?",
+        "reponses": {
+            "Rencontrer les acteurs de solutions MDM / Data-Quality les plus avancése ? ": 1,
+            "Faire un «crowdsourcing» auprès des acteurs terrains pour identifier les principales raisons et impacts de la non-qualité ?": 2,
+            "Mettre en place un processus de prise en compte du sujet Data-Quality dans tous les projets futurs ?": 3
+        },
+        "thème": "Qualité de la donnée",
+        "sous-thème": "Processus"
+    },
+    "31": {
+        "question": "Avez-vous un processus de suivi de la qualité des données ?",
+        "reponses": {
+            "Non": 0,
+            "Oui": 1
+        },
+        "thème": "Qualité de la donnée",
+        "sous-thème": "Processus"
+    },
+    "32": {
+        "question": "Existe-t-il des personnes responsables de la Data-Quality ?",
+        "reponses": {
+            "Non": 0,
+            "Oui": 1
+        },
+        "thème": "Qualité de la donnée",
+        "sous-thème": "Contrôle de la donnée"
+    },
+    "33": {
+        "question": "Existe-t-il des outils afin de contrôler la donnée ?",
+        "reponses": {
+            "Non": 0,
+            "Oui mais pas utilisés": 1,
+            "Oui et utilisés": 2
+        },
+        "thème": "Qualité de la donnée",
+        "sous-thème": "Contrôle de la donnée"
+    },
+    "34": {
+        "question": "Avez-vous une ou des plateformes qui sert les usages décisionnels, de data processing, de DataScience ?  \n (Non mature : utilisation de plusieurs plateformes - Mature :  si ils arrivent à rationaliser sur une meme plateforme)",
+        "reponses": {
+            "Plusieurs plateformes": 1,
+            "Une seule plateforme": 2
+        },
+        "thème": "Socle technique",
+        "sous-thème": "Architecture data"
+    },
+    "35": {
+        "question": "En cas de présence de plusieurs plateformes, comment communiquent les données de ces dernières (si copie KO, si fédération OK)",
+        "reponses": {
+            "Par copie": 1,
+            "Par fédération": 2
+        },
+        "thème": "Socle technique",
+        "sous-thème": "Architecture data"
+    },
+    "36": {
+        "question": "Avez-vous des capacités de partage (Data Sharing) avec d'autres entités de votre groupe ou partenaires ? ",
+        "reponses": {
+            "Non": 0,
+            "Oui": 1
+        },
+        "thème": "Socle technique",
+        "sous-thème": "Architecture data"
+    },
+    "37": {
+        "question": "Si vous avez un socle Hadoop, avez-vous prévu une sortie ? ",
+        "reponses": {
+            "Non": 0,
+            "Oui": 1
+        },
+        "thème": "Socle technique",
+        "sous-thème": "Architecture data"
+    },
+    "38": {
+        "question": "Avez vous des SLAs alignés avec les SI Opérationels ? ",
+        "reponses": {
+            "Non": 0,
+            "Oui": 1
+        },
+        "thème": "Socle technique",
+        "sous-thème": "Architecture data"
+    },
+    "39": {
+        "question": "Avez-vous déployé des solutions data dans le Cloud (Mature : Oui - si non comprendre pourquoi ils n'y vont pas)",
+        "reponses": {
+            "Non": 0,
+            "Oui": 1
+        },
+        "thème": "Socle technique",
+        "sous-thème": "Architecture data"
+    },
+    "40": {
+        "question": "Disposez-vous d'un catalogue de données ?  \n (si oui lequel, à noter dans colonne Justification) ?",
+        "reponses": {
+            "Non": 0,
+            "Oui": 1
+        },
+        "thème": "Socle technique",
+        "sous-thème": "Architecture data"
+    },
+    "41": {
+        "question": "Si oui, est il intégré avec l'ensemble de vos socles ?  \n (répondre seulement si catalogue de données existant)",
+        "reponses": {
+            "Non": 0,
+            "Oui": 1
+        },
+        "thème": "Socle technique",
+        "sous-thème": "Architecture data"
+    },
+    "42": {
+        "question": "Existe-t-il une offre de service Data à destination des métiers ? ",
+        "reponses": {
+            "Non": 0,
+            "Oui": 1
+        },
+        "thème": "Socle technique",
+        "sous-thème": "Outils et offre de services data"
+    },
+    "43": {
+        "question": "Cette offre est elle self service ? \n Sur l'ensemble des besoins (e.g. BI, DS, Open Data, etc.)",
+        "reponses": {
+            "Non": 0,
+            "Oui": 1
+        },
+        "thème": "Socle technique",
+        "sous-thème": "Outils et offre de services data"
+    },
+    "44": {
+        "question": "Avez vous des experts technologiques à dispostion pour accompagner les utilisateurs dans les outils ? (e.g. BI, DS, Open Data, etc.)",
+        "reponses": {
+            "Non": 0,
+            "Oui": 1
+        },
+        "thème": "Socle technique",
+        "sous-thème": "Outils et offre de services data"
+    },
+    "45": {
+        "question": "Avez-vous mis en place un processus de Data Modeling ?",
+        "reponses": {
+            "Non": 0,
+            "Oui": 1
+        },
+        "thème": "Socle technique",
+        "sous-thème": "Outils et offre de services data"
+    },
+    "46": {
+        "question": "Comment qualifieriez-vous la maîtrise règlementaire data par l’ensemble des acteurs impliqués ?",
+        "reponses": {
+            "Des juriestes savent réellement se positionner sur la légalité d’un traitement ? ": 1,
+            "Les acteurs Data-science, DSI et CDO maitrisent parfaitement la chose ? ": 2,
+            "Les métiers sont les premiers concernés et maitrisent totalement l'aspect réglementaire ?": 3
+        },
+        "thème": "Réglementaire/Sécuritaire",
+        "sous-thème": "Maîtrise réglementaire"
+    },
+    "47": {
+        "question": "Existe-t-il dans votre organisation un document (ou des médias) de vulgarisation réglementaire data ?",
+        "reponses": {
+            "Non": 0,
+            "Oui mais ils ne sont pas communiqués au sein de l'entreprise": 1,
+            "Oui et ils sont communiqués au sein de toute l'entreprise": 2
+        },
+        "thème": "Réglementaire/Sécuritaire",
+        "sous-thème": "Maîtrise réglementaire"
+    },
+    "48": {
+        "question": "Jugez-vous que la règlementation des données dans votre secteur industriel / zone géographique est :",
+        "reponses": {
+            "Défavorable à la création de valeur par votre organisation ?": 1,
+            "Une opportunité pour mettre le sujet data au cœur de l’entreprise et en profiter pour accélérer sur la transformation Data-driven ? ": 2
+        },
+        "thème": "Réglementaire/Sécuritaire",
+        "sous-thème": "Maîtrise réglementaire"
+    },
+    "49": {
+        "question": "Comment traitez-vous les règlementations RGPD ?",
+        "reponses": {
+            "Ressources externes (prestataire)": 1,
+            "Ressources internes (DPO)": 2
+        },
+        "thème": "Réglementaire/Sécuritaire",
+        "sous-thème": "Maîtrise réglementaire"
+    },
+    "50": {
+        "question": "Utilisez-vous un outil vous permettant de gérer les risques liés aux données RGPD ?",
+        "reponses": {
+            "Non": 0,
+            "Oui": 1
+        },
+        "thème": "Réglementaire/Sécuritaire",
+        "sous-thème": "Maîtrise réglementaire"
+    },
+    "51": {
+        "question": "Avez-vous un processus de Data Lineage ?",
+        "reponses": {
+            "Non": 0,
+            "Oui": 1
+        },
+        "thème": "Réglementaire/Sécuritaire",
+        "sous-thème": "Maîtrise réglementaire"
+    },
+    "52": {
+        "question": "Existe-t-il une matrice de classification des données dans l'entreprise ?",
+        "reponses": {
+            "Non": 0,
+            "Oui": 1
+        },
+        "thème": "Réglementaire/Sécuritaire",
+        "sous-thème": "Sécuritaire"
+    },
+    "53": {
+        "question": "Avez-vous eu connaissance d'une fuite de données récemment au sein de votre organisation ?",
+        "reponses": {
+            "Non": 0,
+            "Oui": 1
+        },
+        "thème": "Réglementaire/Sécuritaire",
+        "sous-thème": "Sécuritaire"
+    }
+}
