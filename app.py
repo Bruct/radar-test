@@ -13,7 +13,7 @@ from PIL import Image
 #Settings
 
 page_title = "Audit de maturité 360° - Data Gouvernance"
-page_icon = "https://www.wavestone.com/app/uploads/2016/06/E_WAVESTONE_Profil-Twitter_400x400.png"
+page_icon = "logo-browser-bar.png"
 layout = "centered"
 
 st.set_page_config(page_title=page_title, page_icon= page_icon, layout=layout)
@@ -28,6 +28,7 @@ selected = option_menu(
     icons=["pencil-fill", "card-list", "bar-chart-fill", "search"],  
     orientation="horizontal",
     styles = {
+        "nav-link-selected": {"background-color": "#503078"},
         "nav-link": {"font-size": "14px"},
     }
 )
@@ -48,7 +49,7 @@ st.markdown("""
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
+  <div class="collapse navbar-collapse" id="navbarNav"> 
     <ul class="navbar-nav">
       <li class="nav-item active">
         <a class="nav-link disabled" href="#">Home <span class="sr-only">(current)</span></a>
@@ -93,7 +94,7 @@ def find_id_from_name(name):
 def radar_chart(select):
         scores = list(map(round, list(score_compute(select)), [1 for i in range(6)]))
         fig = px.line_polar(
-        {'Maturité':scores, 'Catégorie':['Governance data','Culture data','Cas d\'usages data',
+        {'Maturité':scores, 'Catégorie':['Gouvernance data','Culture data','Cas d\'usages data',
             'Qualité de la donnée', 'Socle technique', "Réglementaire/Sécuritaire"]}, 
         r="Maturité", 
         theta="Catégorie", 
@@ -120,7 +121,7 @@ def multiple_charts(first_choice, second_choice):
     fig = go.Figure()
 
     fig = px.line_polar(
-    {'Maturité':first_score, 'Entreprise': first_choice["nom"], 'Catégorie':['Governance data','Culture data','Cas d\'usages data',
+    {'Maturité':first_score, 'Entreprise': first_choice["nom"], 'Catégorie':['Gouvernance data','Culture data','Cas d\'usages data',
             'Qualité de la donnée', 'Socle technique', "Réglementaire/Sécuritaire"]}, 
     r="Maturité", 
     theta="Catégorie", 
@@ -131,7 +132,7 @@ def multiple_charts(first_choice, second_choice):
     )
 
     fig2 = px.line_polar(
-        {'Maturité':second_score, 'Entreprise': second_choice["nom"], 'Catégorie':['Governance data','Culture data','Cas d\'usages data',
+        {'Maturité':second_score, 'Entreprise': second_choice["nom"], 'Catégorie':['Gouvernance data','Culture data','Cas d\'usages data',
             'Qualité de la donnée', 'Socle technique', "Réglementaire/Sécuritaire"]}, 
         r="Maturité", 
         color_discrete_sequence=["salmon"]*5,
