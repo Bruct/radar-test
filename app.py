@@ -251,7 +251,6 @@ if selected == "Audit":
             if question_dico["sous-thème"]!= sous_theme:
                 sous_theme =  question_dico["sous-thème"]
                 st.subheader(sous_theme)
-            #st.selectbox(question_dico["question"], question_dico["reponses"].keys(), key = i)
             st.radio(question_dico["question"], question_dico["reponses"].keys(), horizontal=False, key = i)
         with st.expander("Commentaires"):
             comment = st.text_area("", placeholder="Commentaires ou justifications", key="commentaire"+question_dico["sous-thème"])
@@ -353,11 +352,19 @@ if selected == "Comparaison":
     df_work = df_data[["nom","score moyen", "secteur", "taille"]+Axes]
     if secteur_leaderboard != "Tout":
         df_work = df_work[df_work["secteur"]==secteur_leaderboard]
+        df_work.drop("secteur", inplace=True, axis=1)
     if taille_leaderboard != "Tout":
         df_work = df_work[df_work["taille"]==taille_leaderboard]
+        df_work.drop("taille", inplace=True, axis=1)
     if axe_leaderboard != "Tout":
         df_work = df_work.sort_values(by=axe_leaderboard, ascending=False).iloc[:5,:]
+        axes_without_choice = Axes
+        axes_without_choice.remove(axe_leaderboard)
+        for elem in axes_without_choice:
+            df_work.drop(elem, inplace=True, axis=1)
     else:
+        for elem in Axes:
+            df_work.drop(elem, inplace=True, axis=1)
         df_work = df_work.sort_values(by='score moyen', ascending=False).iloc[:5,:]
     st.dataframe(df_work.head()) 
     
