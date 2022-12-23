@@ -13,7 +13,7 @@ from PIL import Image
 #Settings
 
 page_title = "Audit de maturité 360° - Data Gouvernance"
-page_icon = "logo-browser-bar.png"
+page_icon = "img/logo-browser-bar.png"
 layout = "centered"
 
 st.set_page_config(page_title=page_title, page_icon= page_icon, layout=layout)
@@ -223,7 +223,7 @@ if selected=="Méthodologie":
                 * Réglementaire/Sécuritaire
                 """)
     st.subheader("3. Grille de lecture des différents niveaux de maturité")
-    image = Image.open('grille.png')
+    image = Image.open('img/grille.png')
     st.image(image, caption='Grille de lecture du radar')
     
     
