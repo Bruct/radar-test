@@ -265,9 +265,7 @@ if selected == "Audit":
             rep["date"]=str(st.session_state["date"])
             for question in dat.keys():
                 rep[question] = st.session_state[question]
-            c = int(list(test_data.keys())[-1])
-            c+=1
-            test_data[str(c)]=rep
+            test_data['reponse']=rep
     if submitted:
         scores = list(score_compute(rep))
         average_score = sum(scores)/float(len(scores))
@@ -301,7 +299,11 @@ if selected == "Audit":
            
 if selected == "Entreprises":
     st.markdown("**Recherchez l'audit de maturité d'une entreprise en particulier**")
-    liste_noms_db = [test_data[l]["nom"] for l in test_data.keys()]   
+    data_keys = list(test_data.keys())
+    liste_noms_db = []
+    for key in data_keys:
+        if isinstance(test_data[key], dict):
+            liste_noms_db.append(test_data[key]["nom"])
     st.selectbox("Veuillez choisir une entreprise", liste_noms_db, key = "chosen1")
     first_selection = test_data[find_id_from_name(st.session_state["chosen1"])]
     scores = list(score_compute(first_selection))
@@ -332,7 +334,11 @@ if selected == "Entreprises":
 if selected == "Comparaison":
     # --- Data visualization ---
     st.markdown("**Comparez deux audits de maturité 360° d'entreprise**")
-    liste_noms_db = [test_data[l]["nom"] for l in test_data.keys()]   
+    data_keys = list(test_data.keys())
+    liste_noms_db = []
+    for key in data_keys:
+        if isinstance(test_data[key], dict):
+            liste_noms_db.append(test_data[key]["nom"]) 
     st.selectbox("Veuillez choisir une entreprise", liste_noms_db, key = "chosen1")
     first_selection = test_data[find_id_from_name(st.session_state["chosen1"])]
 
