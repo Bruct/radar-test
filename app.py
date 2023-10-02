@@ -12,27 +12,81 @@ from PIL import Image
 
 #Settings
 
-page_title = "Audit de maturité 360° - Data Gouvernance"
+page_title = "Radar de maturité Data "
 page_icon = "img/logo-browser-bar.png"
 layout = "centered"
 
 st.set_page_config(page_title=page_title, page_icon= page_icon, layout=layout)
 st.title(page_title )
-#st.text("Retrouvez sur l'onglet formulaire, un formulaire à remplir pour ajouter une \nentreprise ou une entité d'une entreprise dans la base de données.")
-#   st.text("Vous pourrez ensuite visualiser et comparer l'évaluation de maturité de différentes\nentreprises en cliquant sur l'onglet Radar de maturité.")
+left_co, cent_co,last_co = st.columns(3)
+with cent_co:
+    st.image('img/Image1.png')
 
 
 selected = option_menu(
     menu_title=None,
-    options=["Audit", "Entreprises", "Comparaison", "Méthodologie"],
-    icons=["pencil-fill", "card-list", "bar-chart-fill", "search"],  
+    options=["Radar", "Rechercher", "Comparer"],
+    icons=["pencil-fill", "search", "bar-chart-fill"],  
     orientation="horizontal",
     styles = {
         "nav-link-selected": {"background-color": "#503078"},
         "nav-link": {"font-size": "14px"},
     }
 )
-Axes = ["Gouvernance data", "Culture data", "Cas d'usage data", "Qualité de la donnée", "Socle technique", "Réglementaire/Sécuritaire"]
+likert = [
+    "Pas du tout d'accord",
+    "Pas d'accord",
+    "Indifférent",
+    "D'accord",
+    "Tout à fait d'accord"
+]
+axes = [
+    "Axe 1: Gouvernance & Rôles :",
+    "Axe 2: Culture & Sensibilisation :",
+    "Axe 3: Qualité des données & Stockage :",
+    "Axe 4: Outillage & Amélioration continue :",
+    "Axe 5: Sécurité, Confidentialité & Conformité :"
+]
+dico_affirmation = dict()
+dico_affirmation[axes[0]] = [
+    "Un cadre de gestion des données est clairement défini et documenté",   
+    "Le cadre de gouvernance des données est optimal et répond aux besoins de l'entreprise/l'organisation", 
+    "Les responsabilités en matière de gestion des données sont bien définies et comprises de tous", 
+    "Un propriétaire est clairement défini pour chaque ensemble de données",
+    "L'analyse des données conduit à de nouvelles orientations stratégiques",  
+    "Vous disposez de toutes les compétences nécessaires pour analyser les données de manière optimale"   
+]
+dico_affirmation[axes[1]] = [
+    "Les collaborateurs sont sensibilisés sur l'importance des données et de leur gestion",   
+    "Il existe des formations sur la gestion et l'utilisation des données auprès des collaborateurs pour en tirer pleinement parti", 
+    "Les différentes équipes collaborent efficacement pour exploiter les données", 
+    "Des processus de partage de connaissances sont mis en place pour partager les bonnes pratiques liées aux données" 
+]
+dico_affirmation[axes[2]] = [
+    "Les données de l'entreprise sont majoritairement fiables",   
+    "Des processus de correction d'erreurs de données sont définis et mis en place", 
+    "Les données sont mises à jour régulièrement", 
+    "Des règles sont mises en place afin de garantir la cohérence des données entre les différents systèmes",
+    "Le processus de collecte de données est efficacement géré et documenté",   
+    "Les sources de données sont identifiées et évaluées", 
+    "Le stockage des données est conforme aux meilleures pratiques du marché", 
+    "Il existe des politiques de rétention des données pour gérer leur durée de vie" 
+]
+dico_affirmation[axes[3]] = [
+    "Les infrastructures technologiques/outils sont adaptés pour gérer et analyser les données",   
+    "Les outils de gestion des données sont accessibles, documentés et adaptés aux besoins de l'entreprise/l'organisation", 
+    "L'infrastructure technologique est suffisamment évolutive pour accompagner la croissance des données", 
+    "Il existe un processus d'amélioration continue mis en place pour la gestion des données"
+]
+dico_affirmation[axes[4]] = [
+    "Il existe des processus et/ou règles relatifs à la confidentialité des données et ils sont partagés aux collaborateurs",   
+    "Les politiques d'archivage et de suppression des données sont partagées auprès des collaborateurs et appliquées", 
+    "Des procédures dédiées sont partagées auprès des collaborateurs et mises en place pour garantir la destruction sécurisée des données obsolètes", 
+    "Des règles de sécurité sont définies et mises en place pour assurer la protection des données contre les cyberattaques",
+    "Il existe des processus de sauvegarde sécurisés des données de l'entreprise dans le cas d'éventuels sinistres/cyberattaques",   
+    "Vous estimez que l'entreprise/l'organisation est en conformité avec les réglementations de protection des données"
+]
+Axes = ["Gouvernance data", "Culture data", "Qualité de la donnée", "Socle technique", "Réglementaire/Sécuritaire"]
 practice_sectorielle = ["Public sector", "Manufacturing, energy, utilities", "Financial Services", "Retail - Luxe", "Transport & services"]
 f = open("questions-reponses.json", "r", encoding="utf-8")
 dat = json.load(f)
@@ -64,27 +118,45 @@ st.markdown("""
 def score_compute(answers):
     gouvernance_data = 0
     culture_data = 0
-    cas_usage_data = 0
     qualite_data = 0
-    socle_technique = 0
-    reglementaire = 0
-    for i in answers.keys():
+    outillage_data = 0
+    securite = 0
+    for axe, affirmations in answers.items():
+        count = 0
         try:
-            if dat[i]["thème"]=="Gouvernance data":
-                gouvernance_data+= 4*dat[i]["reponses"][answers[i]]/22
-            elif dat[i]["thème"]=="Culture data":
-                culture_data+= 4*dat[i]["reponses"][answers[i]]/22
-            elif dat[i]["thème"]=="Cas d'usage data":
-                cas_usage_data+= 4*dat[i]["reponses"][answers[i]]/21
-            elif dat[i]["thème"]=="Qualité de la donnée":
-                qualite_data+= 4*dat[i]["reponses"][answers[i]]/9
-            elif dat[i]["thème"]=="Socle technique":
-                socle_technique+= 4*dat[i]["reponses"][answers[i]]/14
-            elif dat[i]["thème"]=="Réglementaire/Sécuritaire":
-                reglementaire+= 4*dat[i]["reponses"][answers[i]]/13
+            if axe==axes[0]:
+                for affirmation, reponse in affirmations.items():
+                    count+=1
+                    points = likert.index(reponse)                    
+                    gouvernance_data+= points
+                gouvernance_data = gouvernance_data/count
+            elif axe==axes[1]:
+                for affirmation, reponse in affirmations.items():
+                    count+=1
+                    points = likert.index(reponse)                    
+                    culture_data+= points
+                culture_data = culture_data/count
+            elif axe==axes[2]:
+                for affirmation, reponse in affirmations.items():
+                    count+=1
+                    points = likert.index(reponse)                    
+                    qualite_data+= points
+                qualite_data = qualite_data/count
+            elif axe==axes[3]:
+                for affirmation, reponse in affirmations.items():
+                    count+=1
+                    points = likert.index(reponse)                    
+                    outillage_data+= points
+                outillage_data = outillage_data/count
+            elif axe==axes[4]:
+                for affirmation, reponse in affirmations.items():
+                    count+=1
+                    points = likert.index(reponse)                    
+                    securite+= points
+                securite = securite/count
         except KeyError:
             pass
-    return gouvernance_data, culture_data, cas_usage_data, qualite_data, socle_technique, reglementaire
+    return gouvernance_data, culture_data, qualite_data, outillage_data, securite
         
 def find_id_from_name(name):
     for id, dico in test_data.items():
@@ -92,10 +164,10 @@ def find_id_from_name(name):
             return id   
 
 def radar_chart(select):
-        scores = list(map(round, list(score_compute(select)), [1 for i in range(6)]))
+        scores = list(map(round, list(score_compute(select)), [1 for i in range(5)]))
         fig = px.line_polar(
-        {'Maturité':scores, 'Catégorie':['Gouvernance data','Culture data','Cas d\'usages data',
-            'Qualité de la donnée', 'Socle technique', "Réglementaire/Sécuritaire"]}, 
+        {'Maturité':scores, 'Catégorie':['Gouvernance data','Culture data',
+            'Qualité de la donnée', 'Outillage & Amélioration continue', "Sécurité"]}, 
         r="Maturité", 
         theta="Catégorie", 
         start_angle=360,
@@ -116,13 +188,13 @@ def radar_chart(select):
         st.write(fig)   
 
 def multiple_charts(first_choice, second_choice):
-    first_score = list(map(round, list(score_compute(first_choice)), [1 for i in range(6)]))
-    second_score = list(map(round, list(score_compute(second_choice)), [1 for i in range(6)]))
+    first_score = list(map(round, list(score_compute(first_choice)), [1 for i in range(5)]))
+    second_score = list(map(round, list(score_compute(second_choice)), [1 for i in range(5)]))
     fig = go.Figure()
 
     fig = px.line_polar(
-    {'Maturité':first_score, 'Entreprise': first_choice["nom"], 'Catégorie':['Gouvernance data','Culture data','Cas d\'usages data',
-            'Qualité de la donnée', 'Socle technique', "Réglementaire/Sécuritaire"]}, 
+    {'Maturité':first_score, 'Entreprise': first_choice["nom"], 'Catégorie':['Gouvernance data','Culture data',
+            'Qualité de la donnée', 'Outillage & Amélioration continue', "Sécurité"]}, 
     r="Maturité", 
     theta="Catégorie", 
     start_angle=360,
@@ -132,8 +204,8 @@ def multiple_charts(first_choice, second_choice):
     )
 
     fig2 = px.line_polar(
-        {'Maturité':second_score, 'Entreprise': second_choice["nom"], 'Catégorie':['Gouvernance data','Culture data','Cas d\'usages data',
-            'Qualité de la donnée', 'Socle technique', "Réglementaire/Sécuritaire"]}, 
+        {'Maturité':second_score, 'Entreprise': second_choice["nom"], 'Catégorie':['Gouvernance data','Culture data',
+            'Qualité de la donnée', 'Outillage & Amélioration continue', "Sécurité"]}, 
         r="Maturité", 
         color_discrete_sequence=["salmon"]*5,
         theta="Catégorie",
@@ -160,100 +232,40 @@ def multiple_charts(first_choice, second_choice):
 
     return fig
 
-def metric_box(bold_text, wch_colour_box, small_text="", line_height=22.70, border_width=0):
-    wch_colour_font = (0,0,0)
-    fontsize = 18
-    iconname = "fa-solid fa-ranking-star"
-    htmlstr = f"""<p style='background-color: rgb({wch_colour_box[0]}, 
-                                                {wch_colour_box[1]}, 
-                                                {wch_colour_box[2]}, 0.75); 
-                            color: rgb({wch_colour_font[0]}, 
-                                    {wch_colour_font[1]}, 
-                                    {wch_colour_font[2]}, 0.75); 
-                            font-size: {fontsize}px;
-                            border-color: black;
-                            border-width: {border_width}px;
-                            border-style: solid; 
-                            border-radius: 7px; 
-                            padding-left: 12px; 
-                            padding-top: 18px; 
-                            padding-bottom: 18px; 
-                            line-height:{line_height}px;'>
-                            <i class='{iconname} fa-xs'></i> {bold_text}
-                            </style><BR><span style='font-size: 14px; 
-                            margin-top: 0;'>{small_text}</style></span></p>"""
-    return htmlstr
+def max_index_dict(data_dict):
+    max_number = None
+    for key in data_dict.keys():
+        if key.isdigit():
+            key_as_num = int(key)
+            if max_number is None or key_as_num > max_number:
+                max_number = key_as_num
+    return max_number
     
 # --- Main page ---
-
-if selected=="Méthodologie":
-    #st.markdown("""Pour évaluer au mieux votre maturité en termes de gouvernance de données nous avons élaboré un formulaire
-    #            permettant d'avoir une vision 360° de l'état de la gouvernance des données au sein de votre entreprise.""")
-    st.header("Méthodologie du radar")
-    st.subheader("1. Critères d'évaluation")
-    st.text("Niveaux de maturité possibles:")
-    dic_maturite = {0: ["Sujet non abordé", (231, 0, 35), 0], 1: ["Initial", (251,135,58), 0], 2:["Partiellement mature", (251,235,46), 0], 3:["Mature", (82,198,125), 0], 4:["Amélioration continue", (32,168,117), 0]}
-    lnk = '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.0/css/all.css" crossorigin="anonymous">'
-    htmlstr0 = metric_box(dic_maturite[0][0], dic_maturite[0][1], line_height=36, border_width = dic_maturite[0][2]) 
-    htmlstr1 = metric_box(dic_maturite[1][0], dic_maturite[1][1], small_text="Exploratoire & non structuré", border_width = dic_maturite[1][2])
-    htmlstr2 = metric_box(dic_maturite[2][0], dic_maturite[2][1], small_text="Structuré & non industrialisé", line_height = 14, border_width = dic_maturite[2][2])
-    htmlstr3 = metric_box(dic_maturite[3][0], dic_maturite[3][1], small_text="Structuré & industrialisé", border_width = dic_maturite[3][2])
-    htmlstr4 = metric_box(dic_maturite[4][0], dic_maturite[4][1], line_height=24, border_width = dic_maturite[4][2])
-    second_col0, second_col1, second_col2, second_col3, second_col4 = st.columns(5)
-    second_col0.write(lnk + htmlstr0, unsafe_allow_html=True)
-    second_col1.write(lnk + htmlstr1, unsafe_allow_html=True)
-    second_col2.write(lnk + htmlstr2, unsafe_allow_html=True)
-    second_col3.write(lnk + htmlstr3, unsafe_allow_html=True)
-    second_col4.write(lnk + htmlstr4, unsafe_allow_html=True)
-    #st.markdown("""
-    #            0. **Immature**
-    #            1. **Initial** 
-    #            2. **Partiellement maîtrisé** 
-    #            3. **Maitrisé** 
-    #            4. **Mature** 
-    #            """)
-    st.subheader("2. Axes d'étude")
-    st.markdown("""
-                6 axes évalués dans l'audit 360°:
-                * Gouvernance data
-                * Culture data
-                * Cas d'usage data
-                * Qualité de la donnée 
-                * Socle technique
-                * Réglementaire/Sécuritaire
-                """)
-    st.subheader("3. Grille de lecture des différents niveaux de maturité")
-    image = Image.open('img/grille.png')
-    st.image(image, caption='Grille de lecture du radar')
     
-    
-if selected == "Audit":
-    st.markdown("##### Veuillez remplir le formulaire ci-dessous pour réaliser votre audit de maturité 360°")
+if selected == "Radar":
     placeholder = st.empty()
     with placeholder.form("formulaire"):
-        st.header("Fiche d'identité de l'entreprise")
-        st.markdown("###### IMPORTANT : Veillez à ne pas indiquer le nom du client dans le cadre d'une mission confidentielle ou du secteur financier; indiquez uniquement son secteur d'activité")
-        st.text_area("", placeholder="Nom du client", key="nom")
+        st.markdown("##### Remplir le formulaire ci-dessous pour réaliser votre radar de maturité Data")
+        st.header("Fiche de l'entreprise")
+        st.markdown("###### IMPORTANT : Veiller à ne pas indiquer le nom du client dans le cadre d'une mission confidentielle, seulement son secteur d'activité")
+        st.text_area("", placeholder="Renseigner le nom de l'entité ainsi que l'entité groupe (e.g. CA-GIP - Crédit Agricole)", key="nom")
         st.selectbox("Secteur d'activité", practice_sectorielle, key="secteur")
-        st.selectbox("Taille de l'entreprise", ["0-50 employés", "51-500 employés", "501-1000 employés", "1001 à 2000 employés", "+2000 employés"], key="taille")
-        st.date_input("Date de mise à jour", datetime.datetime(2022, 11, 1), key="date")
-        theme = dat["0"]["thème"]
-        sous_theme = dat["0"]["sous-thème"]
-        st.header(theme)
-        st.subheader(sous_theme)
-        for i, question_dico in dat.items():
-            if question_dico["sous-thème"]!= sous_theme:
-                with st.expander("Commentaires"):
-                    comment = st.text_area("", placeholder="Commentaires: Spécifiez les bonnes pratiques mises en place chez le client justifiant la réponse", key = "commentaire: "+ question_dico["sous-thème"])
-            if question_dico["thème"]!= theme:
-                theme = question_dico["thème"]
-                st.header(theme)
-            if question_dico["sous-thème"]!= sous_theme:
-                sous_theme =  question_dico["sous-thème"]
-                st.subheader(sous_theme)
-            st.radio(question_dico["question"], question_dico["reponses"].keys(), horizontal=False, key = i)
-        with st.expander("Commentaires"):
-            comment = st.text_area("", placeholder="Commentaires ou justifications", key="commentaire"+question_dico["sous-thème"])
+        #st.selectbox("Taille de l'entreprise", ["0-50 employés", "51-500 employés", "501-1000 employés", "1001 à 2000 employés", "+2000 employés"], key="taille")
+        st.date_input("Date de mise à jour", datetime.datetime(2023, 10, 1), key="date")
+        st.markdown("Consigne : Pour chaque réponse, cocher la réponse qui vous semble la plus pertinente :")
+        st.markdown("0. Pas du tout d'accord")
+        st.markdown("1. Pas d'accord")
+        st.markdown("2. Indifférent")
+        st.markdown("3. D'accord")
+        st.markdown("4. Tout à fait d'accord")
+        current_axe = ''
+        for axe, affirmations in dico_affirmation.items():
+            if current_axe != axe:
+                st.header(axe)
+                current_axe = axe
+            for affirmation in affirmations:   
+                st.radio(affirmation, likert, horizontal=False, key=affirmation)
         submitted = st.form_submit_button("Envoyer le formulaire")
         if submitted:
             placeholder.empty()
@@ -261,119 +273,128 @@ if selected == "Audit":
             rep = dict()
             rep["nom"]=st.session_state["nom"]
             rep["secteur"]=st.session_state["secteur"]
-            rep["taille"]=st.session_state["taille"]
             rep["date"]=str(st.session_state["date"])
-            for question in dat.keys():
-                rep[question] = st.session_state[question]
-            test_data['reponse']=rep
+            for axe, affirmations in dico_affirmation.items():
+                if axe not in rep.keys():
+                    rep[axe] = dict()
+                for affirmation in affirmations:
+                    rep[axe][affirmation] = st.session_state[affirmation]
+            current_index = str(max_index_dict(test_data)+1)
+            test_data[current_index]=rep
     if submitted:
         scores = list(score_compute(rep))
         average_score = sum(scores)/float(len(scores))
-        for count,elem in enumerate(Axes):
-            test_data[elem]=scores[count]
-        test_data["score moyen"]=average_score
+        for count,elem in enumerate(axes):
+            test_data[current_index]['score'+elem]=scores[count]
+        test_data[current_index]["score moyen"] = average_score
         with open("random-db.json", 'w', encoding="utf-8") as outfile:
                 json.dump(test_data, outfile, indent=4, ensure_ascii=False)
         col1, col2, col3, col4 = st.columns(4)
         col1.metric("Nom", rep["nom"])
         col2.metric("Secteur d'activité", rep["secteur"])
-        col3.metric("Taille de l'entreprise", rep["taille"])
-        col4.metric("Maturité globale", round(average_score, 1) )
-        dic_maturite = {0: ["Sujet non abordé", (231, 0, 35), 0], 1: ["Initial", (251,135,58), 0], 2:["Partiellement mature", (251,235,46), 0], 3:["Mature", (82,198,125), 0], 4:["Amélioration continue", (32,168,117), 0]}
-        lnk = '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.0/css/all.css" crossorigin="anonymous">'
-        dic_maturite[math.floor(average_score)][2]=2
-        htmlstr0 = metric_box(dic_maturite[0][0], dic_maturite[0][1], line_height=36, border_width = dic_maturite[0][2]) 
-        htmlstr1 = metric_box(dic_maturite[1][0], dic_maturite[1][1], small_text="Exploratoire & non structuré", border_width = dic_maturite[1][2])
-        htmlstr2 = metric_box(dic_maturite[2][0], dic_maturite[2][1], small_text="Structuré & non industrialisé", line_height = 13, border_width = dic_maturite[2][2])
-        htmlstr3 = metric_box(dic_maturite[3][0], dic_maturite[3][1], small_text="Structuré & industrialisé", border_width = dic_maturite[3][2])
-        htmlstr4 = metric_box(dic_maturite[4][0], dic_maturite[4][1], border_width = dic_maturite[4][2])
-        second_col0, second_col1, second_col2, second_col3, second_col4 = st.columns(5)
-        second_col0.write(lnk + htmlstr0, unsafe_allow_html=True)
-        second_col1.write(lnk + htmlstr1, unsafe_allow_html=True)
-        second_col2.write(lnk + htmlstr2, unsafe_allow_html=True)
-        second_col3.write(lnk + htmlstr3, unsafe_allow_html=True)
-        second_col4.write(lnk + htmlstr4, unsafe_allow_html=True)
+        col3.metric("Maturité globale", round(average_score, 1) )
+        with col4:
+            if average_score<1:
+                st.image('img/initial1.png')
+            elif average_score<2:
+                st.image('img/ad-hoc1.png')
+            elif average_score<3:
+                st.image('img/operationnel1.png')
+            elif average_score<4:
+                st.image('img/optimise1.png')    
+            elif average_score<5:
+                st.image('img/organisationnel1.png')    
         radar_chart(rep)
         print(scores)
         
            
-if selected == "Entreprises":
-    st.markdown("**Recherchez l'audit de maturité d'une entreprise en particulier**")
+if selected == "Rechercher":
+    st.markdown("**Les différents niveaux de maturité**")
+    st.image('img/all.png')
+    st.markdown("**Niveau 1 Initial :** L'entreprise/l'organisation n'a pas de cadre de gouvernance instauré. Les données sont gérées de manière ad hoc. Il n'y a pas de processus ni de règles mis en place pour assurer leur qualité, leur suivi, leur sécurité ou leur confidentialité.")
+    st.markdown("**Niveau 2 Ad-hoc :** L'entreprise/l'organisation initie et débute la mise en place de processus et d'instances de gouvernance des données. Il n'y a pas de coordination entre les différents départements et les données ne sont pas toujours bien partagées.")
+    st.markdown("**Niveau 3 Opérationnel :** L'entreprise/l'organisation a un cadre de gouvernance de données établi et mis en place à l'échelle de l'entreprise. Il existe des processus et des règles pour assurer la qualité, le suivi, la sécurité et la confidentialité des données.")
+    st.markdown("**Niveau 4 Optimisé :** L'entreprise/l'organisation s'inscrit dans un processus d'amélioration continue de son cadre de gouvernance mis en place. Des outils sont mis en place afin d'automatiser les processus et améliorer l'efficacité.")
+    st.markdown("**Niveau 5 Organisationnel :** L'entreprise/l'organisation est considérée comme très mature en termes de gouvernance des données. Les données sont utilisées pour prendre des décisions stratégiques et participe à la création de nouveaux produits/services.")
+
+    st.markdown("**Recherche un radar de maturité Data d'une entreprise**")
     data_keys = list(test_data.keys())
     liste_noms_db = []
     for key in data_keys:
         if isinstance(test_data[key], dict):
             liste_noms_db.append(test_data[key]["nom"])
-    st.selectbox("Veuillez choisir une entreprise", liste_noms_db, key = "chosen1")
+    st.selectbox("Choisir une entreprise", liste_noms_db, key = "chosen1")
     first_selection = test_data[find_id_from_name(st.session_state["chosen1"])]
     scores = list(score_compute(first_selection))
     average_score = sum(scores)/float(len(scores))
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Nom", first_selection["nom"])
     col2.metric("Secteur d'activité", first_selection["secteur"])
-    col3.metric("Taille de l'entreprise", first_selection["taille"])
-    col4.metric("Maturité globale", round(average_score,1) )
-
-    dic_maturite = {0: ["Sujet non abordé", (231, 0, 35), 0], 1: ["Initial", (251,135,58), 0], 2:["Partiellement mature", (251,235,46), 0], 3:["Mature", (82,198,125), 0], 4:["Amélioration continue", (32,168,117), 0]}
-    lnk = '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.0/css/all.css" crossorigin="anonymous">'
-    dic_maturite[math.floor(average_score)][2]=2
-    htmlstr0 = metric_box(dic_maturite[0][0], dic_maturite[0][1], line_height=36, border_width = dic_maturite[0][2]) 
-    htmlstr1 = metric_box(dic_maturite[1][0], dic_maturite[1][1], small_text="Exploratoire & non structuré", border_width = dic_maturite[1][2])
-    htmlstr2 = metric_box(dic_maturite[2][0], dic_maturite[2][1], small_text="Structuré & non industrialisé", line_height = 13, border_width = dic_maturite[2][2])
-    htmlstr3 = metric_box(dic_maturite[3][0], dic_maturite[3][1], small_text="Structuré & industrialisé", border_width = dic_maturite[3][2])
-    htmlstr4 = metric_box(dic_maturite[4][0], dic_maturite[4][1], border_width = dic_maturite[4][2])
-    second_col0, second_col1, second_col2, second_col3, second_col4 = st.columns(5)
-    second_col0.write(lnk + htmlstr0, unsafe_allow_html=True)
-    second_col1.write(lnk + htmlstr1, unsafe_allow_html=True)
-    second_col2.write(lnk + htmlstr2, unsafe_allow_html=True)
-    second_col3.write(lnk + htmlstr3, unsafe_allow_html=True)
-    second_col4.write(lnk + htmlstr4, unsafe_allow_html=True)
+    col3.metric("Maturité globale", round(average_score,1) )
+    with col4:
+        if average_score<1:
+            st.image('img/initial1.png')
+        elif average_score<2:
+            st.image('img/ad-hoc1.png')
+        elif average_score<3:
+            st.image('img/operationnel1.png')
+        elif average_score<4:
+            st.image('img/optimise1.png')    
+        elif average_score<5:
+            st.image('img/organisationnel1.png')  
     radar_chart(first_selection)
     print(scores)
        
-if selected == "Comparaison":
+if selected == "Comparer":
     # --- Data visualization ---
-    st.markdown("**Comparez deux audits de maturité 360° d'entreprise**")
+    st.markdown("**Comparer un radar de maturité Data d'une entreprise par rapport au marché**")
     data_keys = list(test_data.keys())
     liste_noms_db = []
     for key in data_keys:
         if isinstance(test_data[key], dict):
             liste_noms_db.append(test_data[key]["nom"]) 
-    st.selectbox("Veuillez choisir une entreprise", liste_noms_db, key = "chosen1")
+    st.selectbox("Choisir une entreprise", liste_noms_db, key = "chosen1")
     first_selection = test_data[find_id_from_name(st.session_state["chosen1"])]
 
-    st.selectbox("Veuillez choisir une entreprise", liste_noms_db, key = "chosen2")
+    st.selectbox("Choisir une entreprise", liste_noms_db, key = "chosen2")
     second_selection = test_data[find_id_from_name(st.session_state["chosen2"])]
     st.plotly_chart(multiple_charts(first_selection, second_selection))
-    
-    st.header(":trophy: Leaderboard")
-    st.markdown("Retrouvez ici le TOP 5 des entreprises selon les critères de votre choix")
-    axe_leaderboard = st.selectbox("Axe de maturité souhaité", ["Tout", "Gouvernance data", "Culture data", "Cas d'usage data", "Qualité de la donnée", "Socle technique", "Réglementaire/Sécuritaire"], key="choix leaderboard")
-    secteur_leaderboard = st.selectbox("Secteur de l'entreprise", ["Tout"]+practice_sectorielle, key="choix secteur")
-    taille_leaderboard = st.selectbox("Taille de l'entreprise", ["Tout"]+["0-50 employés", "51-500 employés", "501-1000 employés", "1001 à 2000 employés", "+2000 employés"], key="choix taille")
-    h = open("random-db.json", "r", encoding="utf-8")
-    test_data = json.load(h)
-    h.close()
-    df_data = pd.DataFrame.from_dict(test_data).T
-    df_work = df_data[["nom","score moyen", "secteur", "taille"]+Axes]
-    if secteur_leaderboard != "Tout":
-        df_work = df_work[df_work["secteur"]==secteur_leaderboard]
-        df_work.drop("secteur", inplace=True, axis=1)
-    if taille_leaderboard != "Tout":
-        df_work = df_work[df_work["taille"]==taille_leaderboard]
-        df_work.drop("taille", inplace=True, axis=1)
-    if axe_leaderboard != "Tout":
-        df_work = df_work.sort_values(by=axe_leaderboard, ascending=False).iloc[:5,:]
-        axes_without_choice = Axes
-        axes_without_choice.remove(axe_leaderboard)
-        for elem in axes_without_choice:
-            df_work.drop(elem, inplace=True, axis=1)
-    else:
-        for elem in Axes:
-            df_work.drop(elem, inplace=True, axis=1)
-        df_work = df_work.sort_values(by='score moyen', ascending=False).iloc[:5,:]
-    st.dataframe(df_work.head()) 
-    
+
+    st.markdown("**Les différents niveaux de maturité**")
+    st.image('img/all.png')
+    st.markdown("**Niveau 1 Initial :** L'entreprise/l'organisation n'a pas de cadre de gouvernance instauré. Les données sont gérées de manière ad hoc. Il n'y a pas de processus ni de règles mis en place pour assurer leur qualité, leur suivi, leur sécurité ou leur confidentialité.")
+    st.markdown("**Niveau 2 Ad-hoc :** L'entreprise/l'organisation initie et débute la mise en place de processus et d'instances de gouvernance des données. Il n'y a pas de coordination entre les différents départements et les données ne sont pas toujours bien partagées.")
+    st.markdown("**Niveau 3 Opérationnel :** L'entreprise/l'organisation a un cadre de gouvernance de données établi et mis en place à l'échelle de l'entreprise. Il existe des processus et des règles pour assurer la qualité, le suivi, la sécurité et la confidentialité des données.")
+    st.markdown("**Niveau 4 Optimisé :** L'entreprise/l'organisation s'inscrit dans un processus d'amélioration continue de son cadre de gouvernance mis en place. Des outils sont mis en place afin d'automatiser les processus et améliorer l'efficacité.")
+    st.markdown("**Niveau 5 Organisationnel :** L'entreprise/l'organisation est considérée comme très mature en termes de gouvernance des données. Les données sont utilisées pour prendre des décisions stratégiques et participe à la création de nouveaux produits/services.")
+
+    # st.header(":trophy: Leaderboard")
+    # st.markdown("Retrouvez ici le TOP 5 des entreprises selon les critères de votre choix")
+    # axe_leaderboard = st.selectbox("Axe de maturité souhaité", ["Tout", "Gouvernance data", "Culture data", "Cas d'usage data", "Qualité de la donnée", "Socle technique", "Réglementaire/Sécuritaire"], key="choix leaderboard")
+    # secteur_leaderboard = st.selectbox("Secteur de l'entreprise", ["Tout"]+practice_sectorielle, key="choix secteur")
+    # taille_leaderboard = st.selectbox("Taille de l'entreprise", ["Tout"]+["0-50 employés", "51-500 employés", "501-1000 employés", "1001 à 2000 employés", "+2000 employés"], key="choix taille")
+    # h = open("random-db.json", "r", encoding="utf-8")
+    # test_data = json.load(h)
+    # h.close()
+    # df_data = pd.DataFrame.from_dict(test_data).T
+    # df_work = df_data[["nom","score moyen", "secteur", "taille"]+Axes]
+    # if secteur_leaderboard != "Tout":
+    #     df_work = df_work[df_work["secteur"]==secteur_leaderboard]
+    #     df_work.drop("secteur", inplace=True, axis=1)
+    # if taille_leaderboard != "Tout":
+    #     df_work = df_work[df_work["taille"]==taille_leaderboard]
+    #     df_work.drop("taille", inplace=True, axis=1)
+    # if axe_leaderboard != "Tout":
+    #     df_work = df_work.sort_values(by=axe_leaderboard, ascending=False).iloc[:5,:]
+    #     axes_without_choice = Axes
+    #     axes_without_choice.remove(axe_leaderboard)
+    #     for elem in axes_without_choice:
+    #         df_work.drop(elem, inplace=True, axis=1)
+    # else:
+    #     for elem in Axes:
+    #         df_work.drop(elem, inplace=True, axis=1)
+    #     df_work = df_work.sort_values(by='score moyen', ascending=False).iloc[:5,:]
+    # st.dataframe(df_work.head()) 
     
     
 # --- Streamlit style ---
