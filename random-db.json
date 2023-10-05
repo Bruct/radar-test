@@ -1,6 +1,6 @@
 {
     "0": {
-        "nom": "test",
+        "nom": "Entreprise1",
         "secteur": "Public sector",
         "date": "2023-10-01",
         "Axe 1: Gouvernance & Rôles :": {
@@ -41,103 +41,5 @@
             "Il existe des processus de sauvegarde sécurisés des données de l'entreprise dans le cas d'éventuels sinistres/cyberattaques": "Pas du tout d'accord",
             "Vous estimez que l'entreprise/l'organisation est en conformité avec les réglementations de protection des données": "Pas du tout d'accord"
         }
-    },
-    "1": {
-        "nom": "Test2",
-        "secteur": "Retail - Luxe",
-        "date": "2023-10-01",
-        "Axe 1: Gouvernance & Rôles :": {
-            "Un cadre de gestion des données est clairement défini et documenté": "Tout à fait d'accord",
-            "Le cadre de gouvernance des données est optimal et répond aux besoins de l'entreprise/l'organisation": "D'accord",
-            "Les responsabilités en matière de gestion des données sont bien définies et comprises de tous": "Pas d'accord",
-            "Un propriétaire est clairement défini pour chaque ensemble de données": "Tout à fait d'accord",
-            "L'analyse des données conduit à de nouvelles orientations stratégiques": "Tout à fait d'accord",
-            "Vous disposez de toutes les compétences nécessaires pour analyser les données de manière optimale": "Tout à fait d'accord"
-        },
-        "Axe 2: Culture & Sensibilisation :": {
-            "Les collaborateurs sont sensibilisés sur l'importance des données et de leur gestion": "Indifférent",
-            "Il existe des formations sur la gestion et l'utilisation des données auprès des collaborateurs pour en tirer pleinement parti": "Tout à fait d'accord",
-            "Les différentes équipes collaborent efficacement pour exploiter les données": "Pas d'accord",
-            "Des processus de partage de connaissances sont mis en place pour partager les bonnes pratiques liées aux données": "Indifférent"
-        },
-        "Axe 3: Qualité des données & Stockage :": {
-            "Les données de l'entreprise sont majoritairement fiables": "Tout à fait d'accord",
-            "Des processus de correction d'erreurs de données sont définis et mis en place": "Indifférent",
-            "Les données sont mises à jour régulièrement": "Tout à fait d'accord",
-            "Des règles sont mises en place afin de garantir la cohérence des données entre les différents systèmes": "Indifférent",
-            "Le processus de collecte de données est efficacement géré et documenté": "D'accord",
-            "Les sources de données sont identifiées et évaluées": "Pas du tout d'accord",
-            "Le stockage des données est conforme aux meilleures pratiques du marché": "Pas d'accord",
-            "Il existe des politiques de rétention des données pour gérer leur durée de vie": "Tout à fait d'accord"
-        },
-        "Axe 4: Outillage & Amélioration continue :": {
-            "Les infrastructures technologiques/outils sont adaptés pour gérer et analyser les données": "D'accord",
-            "Les outils de gestion des données sont accessibles, documentés et adaptés aux besoins de l'entreprise/l'organisation": "Pas d'accord",
-            "L'infrastructure technologique est suffisamment évolutive pour accompagner la croissance des données": "D'accord",
-            "Il existe un processus d'amélioration continue mis en place pour la gestion des données": "Indifférent"
-        },
-        "Axe 5: Sécurité, Confidentialité & Conformité :": {
-            "Il existe des processus et/ou règles relatifs à la confidentialité des données et ils sont partagés aux collaborateurs": "Tout à fait d'accord",
-            "Les politiques d'archivage et de suppression des données sont partagées auprès des collaborateurs et appliquées": "Tout à fait d'accord",
-            "Des procédures dédiées sont partagées auprès des collaborateurs et mises en place pour garantir la destruction sécurisée des données obsolètes": "Indifférent",
-            "Des règles de sécurité sont définies et mises en place pour assurer la protection des données contre les cyberattaques": "Indifférent",
-            "Il existe des processus de sauvegarde sécurisés des données de l'entreprise dans le cas d'éventuels sinistres/cyberattaques": "Tout à fait d'accord",
-            "Vous estimez que l'entreprise/l'organisation est en conformité avec les réglementations de protection des données": "Tout à fait d'accord"
-        },
-        "scoreAxe 1: Gouvernance & Rôles :": 3.3333333333333335,
-        "scoreAxe 2: Culture & Sensibilisation :": 2.25,
-        "scoreAxe 3: Qualité des données & Stockage :": 2.5,
-        "scoreAxe 4: Outillage & Amélioration continue :": 2.25,
-        "scoreAxe 5: Sécurité, Confidentialité & Conformité :": 3.3333333333333335,
-        "score moyen": 2.7333333333333334
-    },
-    "2": {
-        "nom": "Test3",
-        "secteur": "Transport & services",
-        "date": "2023-10-01",
-        "Axe 1: Gouvernance & Rôles :": {
-            "Un cadre de gestion des données est clairement défini et documenté": "Tout à fait d'accord",
-            "Le cadre de gouvernance des données est optimal et répond aux besoins de l'entreprise/l'organisation": "Tout à fait d'accord",
-            "Les responsabilités en matière de gestion des données sont bien définies et comprises de tous": "D'accord",
-            "Un propriétaire est clairement défini pour chaque ensemble de données": "Tout à fait d'accord",
-            "L'analyse des données conduit à de nouvelles orientations stratégiques": "Pas du tout d'accord",
-            "Vous disposez de toutes les compétences nécessaires pour analyser les données de manière optimale": "D'accord"
-        },
-        "Axe 2: Culture & Sensibilisation :": {
-            "Les collaborateurs sont sensibilisés sur l'importance des données et de leur gestion": "Tout à fait d'accord",
-            "Il existe des formations sur la gestion et l'utilisation des données auprès des collaborateurs pour en tirer pleinement parti": "Pas du tout d'accord",
-            "Les différentes équipes collaborent efficacement pour exploiter les données": "Tout à fait d'accord",
-            "Des processus de partage de connaissances sont mis en place pour partager les bonnes pratiques liées aux données": "Pas du tout d'accord"
-        },
-        "Axe 3: Qualité des données & Stockage :": {
-            "Les données de l'entreprise sont majoritairement fiables": "D'accord",
-            "Des processus de correction d'erreurs de données sont définis et mis en place": "Pas du tout d'accord",
-            "Les données sont mises à jour régulièrement": "Tout à fait d'accord",
-            "Des règles sont mises en place afin de garantir la cohérence des données entre les différents systèmes": "Pas du tout d'accord",
-            "Le processus de collecte de données est efficacement géré et documenté": "Tout à fait d'accord",
-            "Les sources de données sont identifiées et évaluées": "Tout à fait d'accord",
-            "Le stockage des données est conforme aux meilleures pratiques du marché": "Tout à fait d'accord",
-            "Il existe des politiques de rétention des données pour gérer leur durée de vie": "Tout à fait d'accord"
-        },
-        "Axe 4: Outillage & Amélioration continue :": {
-            "Les infrastructures technologiques/outils sont adaptés pour gérer et analyser les données": "Tout à fait d'accord",
-            "Les outils de gestion des données sont accessibles, documentés et adaptés aux besoins de l'entreprise/l'organisation": "Tout à fait d'accord",
-            "L'infrastructure technologique est suffisamment évolutive pour accompagner la croissance des données": "Tout à fait d'accord",
-            "Il existe un processus d'amélioration continue mis en place pour la gestion des données": "Tout à fait d'accord"
-        },
-        "Axe 5: Sécurité, Confidentialité & Conformité :": {
-            "Il existe des processus et/ou règles relatifs à la confidentialité des données et ils sont partagés aux collaborateurs": "Indifférent",
-            "Les politiques d'archivage et de suppression des données sont partagées auprès des collaborateurs et appliquées": "Tout à fait d'accord",
-            "Des procédures dédiées sont partagées auprès des collaborateurs et mises en place pour garantir la destruction sécurisée des données obsolètes": "Tout à fait d'accord",
-            "Des règles de sécurité sont définies et mises en place pour assurer la protection des données contre les cyberattaques": "Tout à fait d'accord",
-            "Il existe des processus de sauvegarde sécurisés des données de l'entreprise dans le cas d'éventuels sinistres/cyberattaques": "Tout à fait d'accord",
-            "Vous estimez que l'entreprise/l'organisation est en conformité avec les réglementations de protection des données": "Tout à fait d'accord"
-        },
-        "scoreAxe 1: Gouvernance & Rôles :": 3.0,
-        "scoreAxe 2: Culture & Sensibilisation :": 2.0,
-        "scoreAxe 3: Qualité des données & Stockage :": 2.875,
-        "scoreAxe 4: Outillage & Amélioration continue :": 4.0,
-        "scoreAxe 5: Sécurité, Confidentialité & Conformité :": 3.6666666666666665,
-        "score moyen": 3.1083333333333334
     }
 }

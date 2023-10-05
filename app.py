@@ -12,12 +12,11 @@ from PIL import Image
 
 #Settings
 
-page_title = "Radar de maturité Data "
+page_title = "Radar de maturité Data"
 page_icon = "img/logo-browser-bar.png"
 layout = "centered"
-
 st.set_page_config(page_title=page_title, page_icon= page_icon, layout=layout)
-st.title(page_title )
+st.markdown(f"<h1 style='text-align: center; color: black;'><b>{page_title}</b></h1>", unsafe_allow_html=True)
 left_co, cent_co,last_co = st.columns(3)
 with cent_co:
     st.image('img/Image1.png')
@@ -36,7 +35,7 @@ selected = option_menu(
 likert = [
     "Pas du tout d'accord",
     "Pas d'accord",
-    "Indifférent",
+    "Ni en accord ni en désaccord",
     "D'accord",
     "Tout à fait d'accord"
 ]
@@ -87,7 +86,7 @@ dico_affirmation[axes[4]] = [
     "Vous estimez que l'entreprise/l'organisation est en conformité avec les réglementations de protection des données"
 ]
 Axes = ["Gouvernance data", "Culture data", "Qualité de la donnée", "Socle technique", "Réglementaire/Sécuritaire"]
-practice_sectorielle = ["Public sector", "Manufacturing, energy, utilities", "Financial Services", "Retail - Luxe", "Transport & services"]
+practice_sectorielle = ["Public Sector", "Manufacturing, Energy, Utilities", "Financial Services", "Retail - Luxe", "Transport & Services"]
 f = open("questions-reponses.json", "r", encoding="utf-8")
 dat = json.load(f)
 f.close()
@@ -112,6 +111,13 @@ st.markdown("""
   </div>
 </nav>
 """, unsafe_allow_html=True)
+st.markdown("""
+    <style>
+    .big-font {
+        font-size:20px !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
 # --- functions ---
 
@@ -166,8 +172,8 @@ def find_id_from_name(name):
 def radar_chart(select):
         scores = list(map(round, list(score_compute(select)), [1 for i in range(5)]))
         fig = px.line_polar(
-        {'Maturité':scores, 'Catégorie':['Gouvernance data','Culture data',
-            'Qualité de la donnée', 'Outillage & Amélioration continue', "Sécurité"]}, 
+        {'Maturité':scores, 'Catégorie':['Gouvernance & Rôles','Culture & Sensibilisation',
+            'Qualité des données & Stockage', 'Outillage & Amélioration continue', "Sécurité, Confidentialité & Conformité"]}, 
         r="Maturité", 
         theta="Catégorie", 
         start_angle=360,
@@ -193,8 +199,8 @@ def multiple_charts(first_choice, second_choice):
     fig = go.Figure()
 
     fig = px.line_polar(
-    {'Maturité':first_score, 'Entreprise': first_choice["nom"], 'Catégorie':['Gouvernance data','Culture data',
-            'Qualité de la donnée', 'Outillage & Amélioration continue', "Sécurité"]}, 
+    {'Maturité':first_score, 'Entreprise': first_choice["nom"], 'Catégorie':['Gouvernance & Rôles','Culture & Sensibilisation',
+            'Qualité des données & Stockage', 'Outillage & Amélioration continue', "Sécurité, Confidentialité & Conformité"]}, 
     r="Maturité", 
     theta="Catégorie", 
     start_angle=360,
@@ -241,22 +247,31 @@ def max_index_dict(data_dict):
                 max_number = key_as_num
     return max_number
     
+def print_maturity():
+    st.markdown("<p class='big-font'>Niveaux de maturité</p>", unsafe_allow_html=True)
+    st.image('img/all_numbered.png')
+    st.markdown("**Niveau 1 Initial :** L'entreprise/l'organisation n'a pas de cadre de gouvernance instauré. Les données sont gérées de manière ad hoc. Il n'y a pas de processus ni de règles mis en place pour assurer leur qualité, leur suivi, leur sécurité ou leur confidentialité.")
+    st.markdown("**Niveau 2 Ad-hoc :** L'entreprise/l'organisation initie et débute la mise en place de processus et d'instances de gouvernance des données. Il n'y a pas de coordination entre les différents départements et les données ne sont pas toujours bien partagées.")
+    st.markdown("**Niveau 3 Opérationnel :** L'entreprise/l'organisation a un cadre de gouvernance de données établi et mis en place à l'échelle de l'entreprise. Il existe des processus et des règles pour assurer la qualité, le suivi, la sécurité et la confidentialité des données.")
+    st.markdown("**Niveau 4 Optimisé :** L'entreprise/l'organisation s'inscrit dans un processus d'amélioration continue de son cadre de gouvernance mis en place. Des outils sont mis en place afin d'automatiser les processus et améliorer l'efficacité.")
+    st.markdown("**Niveau 5 Organisationnel :** L'entreprise/l'organisation est considérée comme très mature en termes de gouvernance des données. Les données sont utilisées pour prendre des décisions stratégiques et participe à la création de nouveaux produits/services.")
+    
 # --- Main page ---
     
 if selected == "Radar":
     placeholder = st.empty()
     with placeholder.form("formulaire"):
         st.markdown("##### Remplir le formulaire ci-dessous pour réaliser votre radar de maturité Data")
-        st.header("Fiche de l'entreprise")
-        st.markdown("###### IMPORTANT : Veiller à ne pas indiquer le nom du client dans le cadre d'une mission confidentielle, seulement son secteur d'activité")
+        st.header("Fiche de l'entreprise/organisation")
+        st.markdown("###### IMPORTANT : Merci de ne pas diffuser le lien du Radar Data à toute personne externe à Wavestone pour des questions de confidentialité concernant les données clients présentes. Par ailleurs, veiller à ne pas indiquer le nom du client dans le cadre d'une mission confidentielle, seulement son secteur d'activité (notamment pour le secteur financier).")
         st.text_area("", placeholder="Renseigner le nom de l'entité ainsi que l'entité groupe (e.g. CA-GIP - Crédit Agricole)", key="nom")
         st.selectbox("Secteur d'activité", practice_sectorielle, key="secteur")
         #st.selectbox("Taille de l'entreprise", ["0-50 employés", "51-500 employés", "501-1000 employés", "1001 à 2000 employés", "+2000 employés"], key="taille")
         st.date_input("Date de mise à jour", datetime.datetime(2023, 10, 1), key="date")
-        st.markdown("Consigne : Pour chaque réponse, cocher la réponse qui vous semble la plus pertinente :")
+        st.markdown("Consigne : Pour chaque question, cocher une réponse parmi les 5 proposées")
         st.markdown("0. Pas du tout d'accord")
         st.markdown("1. Pas d'accord")
-        st.markdown("2. Indifférent")
+        st.markdown("2. Ni en accord ni en désaccord")
         st.markdown("3. D'accord")
         st.markdown("4. Tout à fait d'accord")
         current_axe = ''
@@ -309,21 +324,13 @@ if selected == "Radar":
         
            
 if selected == "Rechercher":
-    st.markdown("**Les différents niveaux de maturité**")
-    st.image('img/all.png')
-    st.markdown("**Niveau 1 Initial :** L'entreprise/l'organisation n'a pas de cadre de gouvernance instauré. Les données sont gérées de manière ad hoc. Il n'y a pas de processus ni de règles mis en place pour assurer leur qualité, leur suivi, leur sécurité ou leur confidentialité.")
-    st.markdown("**Niveau 2 Ad-hoc :** L'entreprise/l'organisation initie et débute la mise en place de processus et d'instances de gouvernance des données. Il n'y a pas de coordination entre les différents départements et les données ne sont pas toujours bien partagées.")
-    st.markdown("**Niveau 3 Opérationnel :** L'entreprise/l'organisation a un cadre de gouvernance de données établi et mis en place à l'échelle de l'entreprise. Il existe des processus et des règles pour assurer la qualité, le suivi, la sécurité et la confidentialité des données.")
-    st.markdown("**Niveau 4 Optimisé :** L'entreprise/l'organisation s'inscrit dans un processus d'amélioration continue de son cadre de gouvernance mis en place. Des outils sont mis en place afin d'automatiser les processus et améliorer l'efficacité.")
-    st.markdown("**Niveau 5 Organisationnel :** L'entreprise/l'organisation est considérée comme très mature en termes de gouvernance des données. Les données sont utilisées pour prendre des décisions stratégiques et participe à la création de nouveaux produits/services.")
-
-    st.markdown("**Recherche un radar de maturité Data d'une entreprise**")
+    st.markdown("<p class='big-font'>Recherche un radar de maturité Data d'une entreprise/organisation</p>", unsafe_allow_html=True)
     data_keys = list(test_data.keys())
     liste_noms_db = []
     for key in data_keys:
         if isinstance(test_data[key], dict):
             liste_noms_db.append(test_data[key]["nom"])
-    st.selectbox("Choisir une entreprise", liste_noms_db, key = "chosen1")
+    st.selectbox("Choisir une entreprise/organisation", liste_noms_db, key = "chosen1")
     first_selection = test_data[find_id_from_name(st.session_state["chosen1"])]
     scores = list(score_compute(first_selection))
     average_score = sum(scores)/float(len(scores))
@@ -343,31 +350,22 @@ if selected == "Rechercher":
         elif average_score<5:
             st.image('img/organisationnel1.png')  
     radar_chart(first_selection)
-    print(scores)
-       
+    print_maturity()
 if selected == "Comparer":
     # --- Data visualization ---
-    st.markdown("**Comparer un radar de maturité Data d'une entreprise par rapport au marché**")
+    st.markdown("<p class='big-font'>Comparer un radar de maturité Data d'une entreprise/organisation par rapport au marché</p>", unsafe_allow_html=True)
     data_keys = list(test_data.keys())
     liste_noms_db = []
     for key in data_keys:
         if isinstance(test_data[key], dict):
             liste_noms_db.append(test_data[key]["nom"]) 
-    st.selectbox("Choisir une entreprise", liste_noms_db, key = "chosen1")
+    st.selectbox("Choisir une entreprise/organisation", liste_noms_db, key = "chosen1")
     first_selection = test_data[find_id_from_name(st.session_state["chosen1"])]
 
-    st.selectbox("Choisir une entreprise", liste_noms_db, key = "chosen2")
+    st.selectbox("Choisir une entreprise/organisation", liste_noms_db, key = "chosen2")
     second_selection = test_data[find_id_from_name(st.session_state["chosen2"])]
     st.plotly_chart(multiple_charts(first_selection, second_selection))
-
-    st.markdown("**Les différents niveaux de maturité**")
-    st.image('img/all.png')
-    st.markdown("**Niveau 1 Initial :** L'entreprise/l'organisation n'a pas de cadre de gouvernance instauré. Les données sont gérées de manière ad hoc. Il n'y a pas de processus ni de règles mis en place pour assurer leur qualité, leur suivi, leur sécurité ou leur confidentialité.")
-    st.markdown("**Niveau 2 Ad-hoc :** L'entreprise/l'organisation initie et débute la mise en place de processus et d'instances de gouvernance des données. Il n'y a pas de coordination entre les différents départements et les données ne sont pas toujours bien partagées.")
-    st.markdown("**Niveau 3 Opérationnel :** L'entreprise/l'organisation a un cadre de gouvernance de données établi et mis en place à l'échelle de l'entreprise. Il existe des processus et des règles pour assurer la qualité, le suivi, la sécurité et la confidentialité des données.")
-    st.markdown("**Niveau 4 Optimisé :** L'entreprise/l'organisation s'inscrit dans un processus d'amélioration continue de son cadre de gouvernance mis en place. Des outils sont mis en place afin d'automatiser les processus et améliorer l'efficacité.")
-    st.markdown("**Niveau 5 Organisationnel :** L'entreprise/l'organisation est considérée comme très mature en termes de gouvernance des données. Les données sont utilisées pour prendre des décisions stratégiques et participe à la création de nouveaux produits/services.")
-
+    print_maturity()
     # st.header(":trophy: Leaderboard")
     # st.markdown("Retrouvez ici le TOP 5 des entreprises selon les critères de votre choix")
     # axe_leaderboard = st.selectbox("Axe de maturité souhaité", ["Tout", "Gouvernance data", "Culture data", "Cas d'usage data", "Qualité de la donnée", "Socle technique", "Réglementaire/Sécuritaire"], key="choix leaderboard")
