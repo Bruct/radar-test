@@ -210,8 +210,8 @@ def multiple_charts(first_choice, second_choice):
     )
 
     fig2 = px.line_polar(
-        {'Maturité':second_score, 'Entreprise': second_choice["nom"], 'Catégorie':['Gouvernance data','Culture data',
-            'Qualité de la donnée', 'Outillage & Amélioration continue', "Sécurité"]}, 
+        {'Maturité':second_score, 'Entreprise': second_choice["nom"], 'Catégorie':['Gouvernance & Rôles','Culture & Sensibilisation',
+            'Qualité des données & Stockage', 'Outillage & Amélioration continue', "Sécurité, Confidentialité & Conformité"]}, 
         r="Maturité", 
         color_discrete_sequence=["salmon"]*5,
         theta="Catégorie",
@@ -238,14 +238,14 @@ def multiple_charts(first_choice, second_choice):
 
     return fig
 
-def max_index_dict(data_dict):
+def new_index_dict(data_dict):
     max_number = None
     for key in data_dict.keys():
         if key.isdigit():
             key_as_num = int(key)
             if max_number is None or key_as_num > max_number:
                 max_number = key_as_num
-    return max_number
+    return max_number+1 if max_number != None else 0
     
 def print_maturity():
     st.markdown("<p class='big-font'>Niveaux de maturité</p>", unsafe_allow_html=True)
@@ -264,7 +264,7 @@ if selected == "Radar":
         st.markdown("##### Remplir le formulaire ci-dessous pour réaliser votre radar de maturité Data")
         st.header("Fiche de l'entreprise/organisation")
         st.markdown("###### IMPORTANT : Merci de ne pas diffuser le lien du Radar Data à toute personne externe à Wavestone pour des questions de confidentialité concernant les données clients présentes. Par ailleurs, veiller à ne pas indiquer le nom du client dans le cadre d'une mission confidentielle, seulement son secteur d'activité (notamment pour le secteur financier).")
-        st.text_area("", placeholder="Renseigner le nom de l'entité ainsi que l'entité groupe (e.g. CA-GIP - Crédit Agricole)", key="nom")
+        st.text_area("", placeholder="Renseigner le nom de l'entité ainsi que l'entité groupe", key="nom")
         st.selectbox("Secteur d'activité", practice_sectorielle, key="secteur")
         #st.selectbox("Taille de l'entreprise", ["0-50 employés", "51-500 employés", "501-1000 employés", "1001 à 2000 employés", "+2000 employés"], key="taille")
         st.date_input("Date de mise à jour", datetime.datetime(2023, 10, 1), key="date")
@@ -294,7 +294,7 @@ if selected == "Radar":
                     rep[axe] = dict()
                 for affirmation in affirmations:
                     rep[axe][affirmation] = st.session_state[affirmation]
-            current_index = str(max_index_dict(test_data)+1)
+            current_index = str(new_index_dict(test_data))
             test_data[current_index]=rep
     if submitted:
         scores = list(score_compute(rep))
@@ -324,32 +324,35 @@ if selected == "Radar":
         
            
 if selected == "Rechercher":
-    st.markdown("<p class='big-font'>Recherche un radar de maturité Data d'une entreprise/organisation</p>", unsafe_allow_html=True)
+    st.markdown("<p class='big-font'>Rechercher un radar de maturité Data d'une entreprise/organisation</p>", unsafe_allow_html=True)
     data_keys = list(test_data.keys())
     liste_noms_db = []
     for key in data_keys:
         if isinstance(test_data[key], dict):
             liste_noms_db.append(test_data[key]["nom"])
-    st.selectbox("Choisir une entreprise/organisation", liste_noms_db, key = "chosen1")
-    first_selection = test_data[find_id_from_name(st.session_state["chosen1"])]
-    scores = list(score_compute(first_selection))
-    average_score = sum(scores)/float(len(scores))
-    col1, col2, col3, col4 = st.columns(4)
-    col1.metric("Nom", first_selection["nom"])
-    col2.metric("Secteur d'activité", first_selection["secteur"])
-    col3.metric("Maturité globale", round(average_score,1) )
-    with col4:
-        if average_score<1:
-            st.image('img/initial1.png')
-        elif average_score<2:
-            st.image('img/ad-hoc1.png')
-        elif average_score<3:
-            st.image('img/operationnel1.png')
-        elif average_score<4:
-            st.image('img/optimise1.png')    
-        elif average_score<5:
-            st.image('img/organisationnel1.png')  
-    radar_chart(first_selection)
+    if liste_noms_db!=[]:
+        st.selectbox("Choisir une entreprise/organisation", liste_noms_db, key = "chosen1")
+        first_selection = test_data[find_id_from_name(st.session_state["chosen1"])]
+        scores = list(score_compute(first_selection))
+        average_score = sum(scores)/float(len(scores))
+        col1, col2, col3, col4 = st.columns(4)
+        col1.metric("Nom", first_selection["nom"])
+        col2.metric("Secteur d'activité", first_selection["secteur"])
+        col3.metric("Maturité globale", round(average_score,1) )
+        with col4:
+            if average_score<1:
+                st.image('img/initial1.png')
+            elif average_score<2:
+                st.image('img/ad-hoc1.png')
+            elif average_score<3:
+                st.image('img/operationnel1.png')
+            elif average_score<4:
+                st.image('img/optimise1.png')    
+            elif average_score<5:
+                st.image('img/organisationnel1.png')  
+        radar_chart(first_selection)
+    else:
+        st.write("Pas de questionnaire rempli dans la base de données.")
     print_maturity()
 if selected == "Comparer":
     # --- Data visualization ---
@@ -358,13 +361,16 @@ if selected == "Comparer":
     liste_noms_db = []
     for key in data_keys:
         if isinstance(test_data[key], dict):
-            liste_noms_db.append(test_data[key]["nom"]) 
-    st.selectbox("Choisir une entreprise/organisation", liste_noms_db, key = "chosen1")
-    first_selection = test_data[find_id_from_name(st.session_state["chosen1"])]
+            liste_noms_db.append(test_data[key]["nom"])
+    if liste_noms_db!=[]:
+        st.selectbox("Choisir une entreprise/organisation", liste_noms_db, key = "chosen1")
+        first_selection = test_data[find_id_from_name(st.session_state["chosen1"])]
 
-    st.selectbox("Choisir une entreprise/organisation", liste_noms_db, key = "chosen2")
-    second_selection = test_data[find_id_from_name(st.session_state["chosen2"])]
-    st.plotly_chart(multiple_charts(first_selection, second_selection))
+        st.selectbox("Choisir une entreprise/organisation", liste_noms_db, key = "chosen2")
+        second_selection = test_data[find_id_from_name(st.session_state["chosen2"])]
+        st.plotly_chart(multiple_charts(first_selection, second_selection))
+    else:
+        st.write("Pas de questionnaire rempli dans la base de données.")
     print_maturity()
     # st.header(":trophy: Leaderboard")
     # st.markdown("Retrouvez ici le TOP 5 des entreprises selon les critères de votre choix")
