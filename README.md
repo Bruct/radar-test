@@ -2,7 +2,7 @@
 Test de déploiement radar
 
 # Lancer l'application en local
-L'application est accessible via l'adresse suivante https://bruct-radar-test-app-954ar1.streamlit.app/
+L'application est accessible via l'adresse suivante https://radar-data.streamlit.app/
 
 Pour la déployer en local sur son PC:
 1. Cloner le repo github sur son PC
